@@ -1,12 +1,63 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
-import { PersonService } from '../../services/person.service';
-import { Person } from '../../models/person';
+import {PersonService} from '../../services/person.service';
+import {Person} from '../../models/person';
 
 @Component({
   selector: 'app-edit-person',
-  templateUrl: './edit-person.component.html',
+  template: `
+    <div class="container">
+      <div class="edit-form">
+        <div class="top">
+          <div class="fields">
+            <h1>Edit Team Member</h1>
+            <form class="w3-container">
+              <div class="form-group">
+                <input type="text" class="form-control w3-input w3-border" name="firstName" id="firstName"
+                       [(ngModel)]="person.firstName">
+                <label for="firstName">First Name</label>
+              </div>
+
+              <div class="form-group">
+                <input type="text" class="w3-input w3-border" name="lastName" id="lastName" [(ngModel)]="person.lastName">
+                <label for="lastName">Last Name</label>
+              </div>
+
+              <div class="form-group">
+                <input type="text" class="w3-input w3-border" name="position" id="position" [(ngModel)]="person.position">
+                <label for="position">Position</label>
+              </div>
+
+              <div class="form-group">
+                <input type="text" class="w3-input w3-border" name="teamName" id="teamName" [(ngModel)]="person.teamName">
+                <label for="teamName">Team Name</label>
+              </div>
+
+              <div class="w3-container w3-card-4">
+                <h4>Proficiencies</h4>
+                <p>
+                  <input class="w3-check" type="checkbox">
+                  <label>CSS</label></p>
+                <p>
+                  <input class="w3-check" type="checkbox">
+                  <label>HTML</label></p>
+                <p>
+                  <input class="w3-check" type="checkbox">
+                  <label>JavaScript</label></p>
+              </div>
+            </form>
+          </div>
+
+          <div class="w3-bar">
+            <button class="w3-button" (click)="removePerson(person)">Remove</button>
+            <button class="w3-button" (click)="home()">Cancel</button>
+            <button class="w3-button" (click)="finishEditing()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `,
   styleUrls: ['./edit-person.component.scss']
 })
 export class EditPersonComponent {

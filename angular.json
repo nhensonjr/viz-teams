@@ -123,7 +123,8 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "styleext": "scss"
+      "styleext": "scss",
+      "inlineTemplate": true
     },
     "@schematics/angular:directive": {
       "prefix": "app"

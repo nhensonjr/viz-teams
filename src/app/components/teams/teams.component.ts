@@ -4,7 +4,17 @@ import {Team} from '../../models/team';
 
 @Component({
   selector: 'app-teams',
-  templateUrl: './teams.component.html',
+  template: `
+    <div class="container">
+      <div class="app-sidebar">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div [ngClass]="teams.length > 0 ? 'app-team-list team-view' : 'app-team-list no-team-view'">
+        <app-team-list></app-team-list>
+      </div>
+    </div>
+
+  `,
   styleUrls: ['./teams.component.scss']
 })
 export class TeamsComponent {

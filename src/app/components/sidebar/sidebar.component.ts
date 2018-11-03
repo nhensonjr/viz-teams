@@ -1,12 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { Person } from '../../models/person';
-import { PersonService } from '../../services/person.service';
-import { Team } from '../../models/team';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Person} from '../../models/person';
+import {PersonService} from '../../services/person.service';
+import {Team} from '../../models/team';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
+  template: `
+    <div class="sidebar" appDropTarget (myDrop)="onDrop($event,team)">
+      <button *ngIf="!isAdding" (click)="startAdding()">Add Person</button>
+      <div *ngIf="isAdding" class="add-form">
+        <input type="text" [(ngModel)]="person.firstName" placeholder="First Name" (change)="validatePerson()">
+        <input type="text" [(ngModel)]="person.lastName" placeholder="Last Name" (change)="validatePerson()">
+        <input type="text" [(ngModel)]="person.position" placeholder="Position" (change)="validatePerson()">
+        <input type="text" [(ngModel)]="person.teamName" placeholder="Team Name" (change)="validatePerson()">
+        <div class="form-btns">
+          <button class="cancel" (click)="stopAdding()">Cancel</button>
+          <button class="save" (click)="finishAdding()" [disabled]="isDisabled()">Done</button>
+        </div>
+      </div>
+      <br>
+
+      <div class="freeAgentContainer" *ngFor="let person of (freeAgents | sidebarSortAsc)">
+        <div class="freeAgent" [appDraggable]="{data:person}">
+          <p>{{ person.firstName }} {{ person.lastName }}, {{ person.position }}</p>
+          <div class="form-btns">
+            <button (click)="edit(person)">Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `,
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
@@ -18,6 +42,7 @@ export class SidebarComponent {
   canSubmit = false;
   team: Team;
   isAddingTeam = false;
+
   constructor(
     private personService: PersonService,
     private router: Router) {
@@ -66,7 +91,6 @@ export class SidebarComponent {
     this.clearFields();
   }
 
-  
 
   validateTeam() {
     this.team.name !== ''
