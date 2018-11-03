@@ -8,15 +8,15 @@ import {Router} from '@angular/router';
   selector: 'app-sidebar',
   template: `
     <div class="sidebar" appDropTarget (myDrop)="onDrop($event,team)">
-      <button *ngIf="!isAdding" (click)="startAdding()">Add Person</button>
+      <button class="w3-button w3-purple" *ngIf="!isAdding" (click)="startAdding()">Add Person<i class='fas fa-user w3-margin-left'></i></button>
       <div *ngIf="isAdding" class="add-form">
-        <input type="text" [(ngModel)]="person.firstName" placeholder="First Name" (change)="validatePerson()">
-        <input type="text" [(ngModel)]="person.lastName" placeholder="Last Name" (change)="validatePerson()">
-        <input type="text" [(ngModel)]="person.position" placeholder="Position" (change)="validatePerson()">
-        <input type="text" [(ngModel)]="person.teamName" placeholder="Team Name" (change)="validatePerson()">
+        <input class="w3-input" type="text" [(ngModel)]="person.firstName" placeholder="First Name" (change)="validatePerson()">
+        <input class="w3-input" type="text" [(ngModel)]="person.lastName" placeholder="Last Name" (change)="validatePerson()">
+        <input class="w3-input" type="text" [(ngModel)]="person.position" placeholder="Position" (change)="validatePerson()">
+        <input class="w3-input" type="text" [(ngModel)]="person.teamName" placeholder="Team Name" (change)="validatePerson()">
         <div class="form-btns">
-          <button class="cancel" (click)="stopAdding()">Cancel</button>
-          <button class="save" (click)="finishAdding()" [disabled]="isDisabled()">Done</button>
+          <button class="w3-button w3-red w3-margin-right" (click)="stopAdding()">Cancel</button>
+          <button class="w3-button w3-green" (click)="finishAdding()" [disabled]="isDisabled()">Done</button>
         </div>
       </div>
       <br>
@@ -25,7 +25,8 @@ import {Router} from '@angular/router';
         <div class="freeAgent" [appDraggable]="{data:person}">
           <p>{{ person.firstName }} {{ person.lastName }}, {{ person.position }}</p>
           <div class="form-btns">
-            <button (click)="edit(person)">Edit</button>
+            <div class="w3-container w3-hover-none w3-hover-text-red" (click)="edit(person)"><i class='fas fa-trash'></i></div>
+            <div class="w3-container w3-hover-none w3-hover-text-green" (click)="edit(person)"><i class='fas fa-pen'></i></div>
           </div>
         </div>
       </div>

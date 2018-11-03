@@ -14,36 +14,31 @@ import {Person} from '../../models/person';
             <h1>Edit Team Member</h1>
             <form class="w3-container">
               <div class="form-group">
-                <input type="text" class="form-control w3-input w3-border" name="firstName" id="firstName"
-                       [(ngModel)]="person.firstName">
-                <label for="firstName">First Name</label>
+                <input type="text" class="form-control w3-input" name="firstName" id="firstName" placeholder="First Name" [(ngModel)]="person.firstName">
               </div>
 
               <div class="form-group">
-                <input type="text" class="w3-input w3-border" name="lastName" id="lastName" [(ngModel)]="person.lastName">
-                <label for="lastName">Last Name</label>
+                <input type="text" class="w3-input" name="lastName" id="lastName" placeholder="Last Name" [(ngModel)]="person.lastName">
               </div>
 
               <div class="form-group">
-                <input type="text" class="w3-input w3-border" name="position" id="position" [(ngModel)]="person.position">
-                <label for="position">Position</label>
+                <input type="text" class="w3-input" name="position" id="position" placeholder="Position" [(ngModel)]="person.position">
               </div>
 
               <div class="form-group">
-                <input type="text" class="w3-input w3-border" name="teamName" id="teamName" [(ngModel)]="person.teamName">
-                <label for="teamName">Team Name</label>
+                <input type="text" class="w3-input" name="teamName" id="teamName" placeholder="Team Name" [(ngModel)]="person.teamName">
               </div>
 
               <div class="w3-container w3-card-4">
                 <h4>Proficiencies</h4>
                 <p>
-                  <input class="w3-check" type="checkbox">
+                  <input class="w3-check w3-margin-right" type="checkbox">
                   <label>CSS</label></p>
                 <p>
-                  <input class="w3-check" type="checkbox">
+                  <input class="w3-check w3-margin-right" type="checkbox">
                   <label>HTML</label></p>
                 <p>
-                  <input class="w3-check" type="checkbox">
+                  <input class="w3-check w3-margin-right" type="checkbox">
                   <label>JavaScript</label></p>
               </div>
             </form>

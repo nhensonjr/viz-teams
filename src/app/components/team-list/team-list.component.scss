@@ -28,6 +28,7 @@
 
 .fa-trash {
   display: none;
+  margin: 8px
 }
 
 .team-list{
@@ -95,14 +96,14 @@
     display: flex;
     flex-direction: column;
   }
-  .btns {
+  #edit {
     align-self: center;
     display: none;
   }
 }
 
 .team-member:hover {
-  .btns {
+  #edit {
     display: flex;
   }
 }
@@ -172,4 +173,12 @@
     background-color: rgb(86, 94, 170);
     cursor: pointer;
   }
+}
+
+#edit {
+  display: none;
+}
+
+#edit:hover {
+  display: flex;
 }

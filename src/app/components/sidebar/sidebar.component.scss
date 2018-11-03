@@ -1,74 +1,46 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    a {
-        text-decoration: none;
-        color: white;
-    }
+  //margin: 0;
+  //padding: 0;
+  box-sizing: border-box;
+  a {
+    text-decoration: none;
+    color: white;
+  }
 
-    .form-btns {
-        width: 100%;
-        display: inline-block;
-        button {
-            border: none;
-            margin-top: 5px;
-            min-width: 60px;
-            text-align: center;
-            font-size: .85rem;
-        }
-
-        .save:hover {
-            background-color: #87c652;
-        }
-
-        .cancel:hover {
-            background: rgb(255, 78, 0);
-        }
-    }
+  .form-btns {
+    display: flex;
+    justify-content: center;
+    justify-self: flex-end;
+  }
 }
 
-.sidebar { 
-    height: calc(100vh - 60px);
-    background-color: lightgray;
-    padding: 10px;
+.sidebar {
+  height: calc(100vh - 60px);
+  background-color: lightgray;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  min-height: min-content;
+  overflow: auto;
+  .add-form {
+    input[type=text] {
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+  .freeAgentContainer {
     display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    min-height: min-content;
-    overflow: auto;
-    button {
-        border: none;
-        width:100%;
-        padding: 10px;
-        color: white;
-        background-color: rgb(86, 94, 170);
-        transition-duration: 0.3s;
-        border-radius: 2rem;
+    width: 100%;
+    .freeAgent {
+      display: flex;
+      width: 100%;
+      margin-top: 10px;
+      flex-direction: column;
+      border: 1px solid darkgray;
+      box-shadow: darkgray 2px 2px 9px 0px;
+      padding: 1rem;
+      background-color: white;
     }
-    button:hover {
-        background-color: rgb(1, 173, 171);
-        cursor: pointer;
-    }
-    .add-form {
-        input[type=text] {
-            width: 100%;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-    }
-    .freeAgentContainer {
-        display: flex;
-        width: 100%;
-        margin-top: 10px;
-        .freeAgent {
-            display: flex;
-            width: 100%;
-            flex-direction: column;
-            border: 1px solid darkgray;
-            box-shadow:darkgray 2px 2px 9px 0px;
-            padding: 1rem;   
-            background-color: white;
-        }
-    }
+  }
 }

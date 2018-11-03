@@ -41,8 +41,8 @@ import {Router} from '@angular/router';
         <div class="drop-target" appDropTarget (myDrop)="onDrop($event,team)">
           <div class="team-header w3-display-container w3-padding w3-margin-top w3-teal w3-center">
             {{team.name}} Team
-            <div class="w3-display-right w3-red w3-margin-right" (click)="removeTeam(team)">
-              <i class="fa fa-trash"></i>
+            <div class="w3-display-right" (click)="removeTeam(team)">
+              <div class="w3-container w3-hover-none w3-hover-text-red"><i class='fas fa-trash'></i></div>
             </div>
           </div>
           <div *ngFor='let person of (team.members | personSortAsc)'>
@@ -51,10 +51,8 @@ import {Router} from '@angular/router';
                 <div>{{person.firstName}} {{person.lastName}},</div>
                 <div>{{person.position}}</div>
               </div>
-              <div class="btns">
-                <button class="w3-button w3-purple" (click)="edit(person)">
-                  Edit
-                </button>
+              <div id="edit" class="btns">
+                  <div class="w3-container w3-hover-none w3-hover-text-green" (click)="edit(person)"><i class='fas fa-pen'></i></div>
               </div>
             </div>
           </div>
