@@ -1,15 +1,33 @@
-.container{
+app-team-list {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.container {
+  display: flex;
+  clear: both;
+  .app-sidebar {
+    width: 15%;
+    min-width: 140px;
+    height: calc(100vh - 60px);
+    overflow: auto;
+  }
+  .app-team-list {
     display: flex;
-    clear: both;
-    .app-sidebar{
-        width: 15%;
-        min-width: 140px;
-        height: calc(100vh - 60px);
-        overflow: auto;
-    }
-    .app-team-list{
-        width: 85%;
-        height: calc(100vh - 60px);
-        overflow: auto;
-    }
+    width: 85%;
+    height: calc(100vh - 60px);
+    overflow: auto;
+  }
+
+  .team-view {
+    justify-content: flex-start;
+    align-items: baseline;
+    flex-direction: row;
+  }
+
+  .no-team-view {
+    justify-content: center;
+    align-items: center;
+  }
 }

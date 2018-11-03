@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Person } from '../../models/person';
-import { PersonParserService } from '../../services/person-parser.service';
-import { Team } from '../../models/team';
-import { PersonService } from '../../services/person.service';
-import { TeamService } from '../../services/team.service';
-import { Router } from '@angular/router';
+import {Component, Input} from '@angular/core';
+import {Person} from '../../models/person';
+import {PersonParserService} from '../../services/person-parser.service';
+import {Team} from '../../models/team';
+import {PersonService} from '../../services/person.service';
+import {TeamService} from '../../services/team.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-team-list',
@@ -18,7 +18,7 @@ export class TeamListComponent {
   validation = '';
 
   teams: Team[] = [];
-  team: Team = new Team(0 ,"" ,[] );
+  team: Team = new Team(0, '', []);
   canSubmit = false;
 
   constructor(
@@ -46,21 +46,17 @@ export class TeamListComponent {
   }
 
   removeTeam(team: Team): void {
-    if(confirm("This will permanently delete this team, are you sure?")){
+    if (confirm('This will permanently delete this team, are you sure?')) {
       this.teamService.removeTeam(team);
     }
-    
   }
 
   addTeam() {
-    
-      // Temporary fix until database is hooked up
-      const randomId = Math.floor(Math.random() * 1000);
-      const thisTeam = new Team(randomId, this.team.name, []);
-      this.teamService.addTeam(thisTeam);
-      this.team = new Team(0,"",[]);
-     
-    
+    // Temporary fix until database is hooked up
+    const randomId = Math.floor(Math.random() * 1000);
+    const thisTeam = new Team(randomId, this.team.name, []);
+    this.teamService.addTeam(thisTeam);
+    this.team = new Team(0, '', []);
   }
 
   validateTeam() {
@@ -79,11 +75,11 @@ export class TeamListComponent {
     if (extension === 'csv') {
       this.valid = 'Valid';
       this.validation = 'green';
-      if(confirm('Importing will delete current data. Are you sure?')){
+      if (confirm('Importing will delete current data. Are you sure?')) {
         this.importCsv(val);
-      (< HTMLInputElement > document.getElementById('srcfile')).value = null;
+        (< HTMLInputElement > document.getElementById('srcfile')).value = null;
       }
-      
+
     } else {
       this.valid = 'Invalid';
       this.validation = 'red';
@@ -91,7 +87,7 @@ export class TeamListComponent {
   }
 
   importCsv(val): void {
-    const file = new Blob (val.srcElement.files);
+    const file = new Blob(val.srcElement.files);
     this.personParserService.parsecsv(file);
   }
 
@@ -141,7 +137,7 @@ export class TeamListComponent {
   }
 
   downloadTemplate(data: any) {
-    const blob = new Blob([data], { type: 'text/csv' });
+    const blob = new Blob([data], {type: 'text/csv'});
     const url = window.URL.createObjectURL(blob);
     const anchor = document.createElement('a');
     anchor.download = 'VizTeamsTemplate.csv';
