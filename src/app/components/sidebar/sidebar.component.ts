@@ -16,7 +16,7 @@ import {Router} from '@angular/router';
         <input class="w3-input" type="text" [(ngModel)]="person.teamName" placeholder="Team Name" (change)="validatePerson()">
         <div class="form-btns">
           <button class="w3-button w3-red w3-margin-right" (click)="stopAdding()">Cancel</button>
-          <button class="w3-button w3-green" (click)="finishAdding()" [disabled]="isDisabled()">Done</button>
+          <button class="w3-button w3-teal" (click)="finishAdding()" [disabled]="isDisabled()">Done</button>
         </div>
       </div>
       <br>
@@ -26,7 +26,7 @@ import {Router} from '@angular/router';
           <p>{{ person.firstName }} {{ person.lastName }}, {{ person.position }}</p>
           <div class="form-btns">
             <div class="w3-container w3-hover-none w3-hover-text-red" (click)="edit(person)"><i class='fas fa-trash'></i></div>
-            <div class="w3-container w3-hover-none w3-hover-text-green" (click)="edit(person)"><i class='fas fa-pen'></i></div>
+            <div class="w3-container w3-hover-none w3-hover-text-teal" (click)="edit(person)"><i class='fas fa-edit'></i></div>
           </div>
         </div>
       </div>

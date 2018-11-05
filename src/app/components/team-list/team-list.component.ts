@@ -40,7 +40,7 @@ import {Router} from '@angular/router';
       <div class="team-column w3-animate-top" *ngFor='let team of (teams | teamSortAsc)'>
         <div class="drop-target" appDropTarget (myDrop)="onDrop($event,team)">
           <div class="team-header w3-display-container w3-padding w3-margin-top w3-teal w3-center">
-            {{team.name}} Team
+            <h4>{{team.name}} Team</h4>
             <div class="w3-display-right" (click)="removeTeam(team)">
               <div class="w3-container w3-hover-none w3-hover-text-red"><i class='fas fa-trash'></i></div>
             </div>
@@ -52,7 +52,7 @@ import {Router} from '@angular/router';
                 <div>{{person.position}}</div>
               </div>
               <div id="edit" class="btns">
-                  <div class="w3-container w3-hover-none w3-hover-text-green" (click)="edit(person)"><i class='fas fa-pen'></i></div>
+                  <div class="w3-container w3-hover-none w3-hover-text-green" (click)="edit(person)"><i class='fas fa-edit'></i></div>
               </div>
             </div>
           </div>

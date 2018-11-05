@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'app-header',
   template: `
-    <div class="container">
+    <div class="container w3-orange">
       <div class="logo">
         <img routerLink="home" src="/assets/vizTeams.png" alt="Viz Teams Logo">
       </div>
