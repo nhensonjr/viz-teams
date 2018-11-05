@@ -10,10 +10,10 @@ import {Router} from '@angular/router';
     <div class="sidebar" appDropTarget (myDrop)="onDrop($event,team)">
       <button class="w3-button w3-purple" *ngIf="!isAdding" (click)="startAdding()">Add Person<i class='fas fa-user w3-margin-left'></i></button>
       <div *ngIf="isAdding" class="add-form">
-        <input class="w3-input" type="text" [(ngModel)]="person.firstName" placeholder="First Name" (change)="validatePerson()">
-        <input class="w3-input" type="text" [(ngModel)]="person.lastName" placeholder="Last Name" (change)="validatePerson()">
-        <input class="w3-input" type="text" [(ngModel)]="person.position" placeholder="Position" (change)="validatePerson()">
-        <input class="w3-input" type="text" [(ngModel)]="person.teamName" placeholder="Team Name" (change)="validatePerson()">
+        <input class="w3-input" type="text" [(ngModel)]="person.firstName" placeholder="First Name" (ngModelChange)="validatePerson()">
+        <input class="w3-input" type="text" [(ngModel)]="person.lastName" placeholder="Last Name" (ngModelChange)="validatePerson()">
+        <input class="w3-input" type="text" [(ngModel)]="person.position" placeholder="Position" (ngModelChange)="validatePerson()">
+        <input class="w3-input" type="text" [(ngModel)]="person.teamName" placeholder="Team Name" (ngModelChange)="validatePerson()">
         <div class="form-btns">
           <button class="w3-button w3-red w3-margin-right" (click)="stopAdding()">Cancel</button>
           <button class="w3-button w3-teal" (click)="finishAdding()" [disabled]="isDisabled()">Done</button>
