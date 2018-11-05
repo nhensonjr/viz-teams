@@ -25,7 +25,7 @@ import {Router} from '@angular/router';
         <div class="freeAgent" [appDraggable]="{data:person}">
           <p>{{ person.firstName }} {{ person.lastName }}, {{ person.position }}</p>
           <div class="form-btns">
-            <div class="w3-container w3-hover-none w3-hover-text-red" (click)="edit(person)"><i class='fas fa-trash'></i></div>
+            <div class="w3-container w3-hover-none w3-hover-text-red" (click)="removePerson(person)"><i class='fas fa-trash'></i></div>
             <div class="w3-container w3-hover-none w3-hover-text-teal" (click)="edit(person)"><i class='fas fa-edit'></i></div>
           </div>
         </div>
@@ -43,6 +43,7 @@ export class SidebarComponent {
   canSubmit = false;
   team: Team;
   isAddingTeam = false;
+  personToRemove: string;
 
   constructor(
     private personService: PersonService,
@@ -119,5 +120,11 @@ export class SidebarComponent {
 
   edit(person: Person) {
     this.router.navigateByUrl('/edit/' + person.id);
+  }
+
+  removePerson(person: Person) {
+    this.personToRemove = person.firstName + ' ' + person.lastName;
+    confirm('Are you sure you want to remove ' + this.personToRemove + '?');
+    this.personService.removePerson(person);
   }
 }
