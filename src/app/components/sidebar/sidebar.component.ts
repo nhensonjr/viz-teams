@@ -8,8 +8,8 @@ import {Router} from '@angular/router';
   selector: 'app-sidebar',
   template: `
     <div class="sidebar" appDropTarget (myDrop)="onDrop($event,team)">
-      <button class="w3-button w3-purple" *ngIf="!isAdding" (click)="startAdding()">Add Person<i class='fas fa-user w3-margin-left'></i></button>
-      <div *ngIf="isAdding" class="add-form">
+      <button class="w3-button w3-purple w3-animate-top" *ngIf="!isAdding" (click)="startAdding()">Add Person<i class='fas fa-user w3-margin-left'></i></button>
+      <div *ngIf="isAdding" class="add-form w3-animate-top">
         <input class="w3-input" type="text" [(ngModel)]="person.firstName" placeholder="First Name" (ngModelChange)="validatePerson()">
         <input class="w3-input" type="text" [(ngModel)]="person.lastName" placeholder="Last Name" (ngModelChange)="validatePerson()">
         <input class="w3-input" type="text" [(ngModel)]="person.position" placeholder="Position" (ngModelChange)="validatePerson()">
@@ -21,7 +21,7 @@ import {Router} from '@angular/router';
       </div>
       <br>
 
-      <div class="freeAgentContainer" *ngFor="let person of (freeAgents | sidebarSortAsc)">
+      <div class="freeAgentContainer w3-animate-left" *ngFor="let person of (freeAgents | sidebarSortAsc)">
         <div class="freeAgent" [appDraggable]="{data:person}">
           <p>{{ person.firstName }} {{ person.lastName }}, {{ person.position }}</p>
           <div class="form-btns">
