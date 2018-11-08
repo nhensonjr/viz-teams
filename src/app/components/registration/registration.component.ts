@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-registration',
   template: `
-    <div class="registration-form w3-container w3-animate-top">
+    <div class="w3-center-card w3-container w3-animate-top">
       <form class="w3-container w3-half w3-card-4 w3-light-grey w3-text-teal">
         <h2 class="w3-center">Registration</h2>
 

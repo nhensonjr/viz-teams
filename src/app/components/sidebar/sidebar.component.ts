@@ -1,19 +1,24 @@
-import {Component} from '@angular/core';
-import {Person} from '../../models/person';
-import {PersonService} from '../../services/person.service';
-import {Team} from '../../models/team';
-import {Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { Person } from '../../models/person';
+import { PersonService } from '../../services/person.service';
+import { Team } from '../../models/team';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   template: `
     <div class="sidebar" appDropTarget (myDrop)="onDrop($event,team)">
-      <button class="w3-button w3-purple w3-animate-top" *ngIf="!isAdding" (click)="startAdding()">Add Person<i class='fas fa-user w3-margin-left'></i></button>
+      <button class="w3-button w3-purple w3-animate-top" *ngIf="!isAdding" (click)="startAdding()">Add Person<i
+        class='fas fa-user w3-margin-left'></i></button>
       <div *ngIf="isAdding" class="add-form w3-animate-top">
-        <input class="w3-input" type="text" [(ngModel)]="person.firstName" placeholder="First Name" (ngModelChange)="validatePerson()">
-        <input class="w3-input" type="text" [(ngModel)]="person.lastName" placeholder="Last Name" (ngModelChange)="validatePerson()">
-        <input class="w3-input" type="text" [(ngModel)]="person.position" placeholder="Position" (ngModelChange)="validatePerson()">
-        <input class="w3-input" type="text" [(ngModel)]="person.teamName" placeholder="Team Name" (ngModelChange)="validatePerson()">
+        <input class="w3-input" type="text" [(ngModel)]="person.firstName" placeholder="First Name"
+               (ngModelChange)="validatePerson()">
+        <input class="w3-input" type="text" [(ngModel)]="person.lastName" placeholder="Last Name"
+               (ngModelChange)="validatePerson()">
+        <input class="w3-input" type="text" [(ngModel)]="person.position" placeholder="Position"
+               (ngModelChange)="validatePerson()">
+        <input class="w3-input" type="text" [(ngModel)]="person.teamName" placeholder="Team Name"
+               (ngModelChange)="validatePerson()">
         <div class="form-btns">
           <button class="w3-button w3-red w3-margin-right" (click)="stopAdding()">Cancel</button>
           <button class="w3-button w3-teal" (click)="finishAdding()" [disabled]="isDisabled()">Done</button>
@@ -25,8 +30,10 @@ import {Router} from '@angular/router';
         <div class="freeAgent" [appDraggable]="{data:person}">
           <p>{{ person.firstName }} {{ person.lastName }}, {{ person.position }}</p>
           <div class="form-btns">
-            <div class="w3-container w3-hover-none w3-hover-text-red" (click)="removePerson(person)"><i class='fas fa-trash'></i></div>
-            <div class="w3-container w3-hover-none w3-hover-text-teal" (click)="edit(person)"><i class='fas fa-edit'></i></div>
+            <div class="w3-container w3-hover-none w3-hover-text-red" (click)="removePerson(person)"><i
+              class='fas fa-trash'></i></div>
+            <div class="w3-container w3-hover-none w3-hover-text-teal" (click)="edit(person)"><i
+              class='fas fa-edit'></i></div>
           </div>
         </div>
       </div>
@@ -124,7 +131,8 @@ export class SidebarComponent {
 
   removePerson(person: Person) {
     this.personToRemove = person.firstName + ' ' + person.lastName;
-    confirm('Are you sure you want to remove ' + this.personToRemove + '?');
-    this.personService.removePerson(person);
+    if (confirm('Are you sure you want to remove ' + this.personToRemove + '?')) {
+      this.personService.removePerson(person);
+    }
   }
 }

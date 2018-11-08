@@ -379,6 +379,16 @@ template {
   display: none;
 }
 
+.w3-center-card {
+  display: flex;
+  justify-content: center;
+  margin-top: 64px;
+}
+
+.w3-cursor {
+  cursor: pointer;
+}
+
 
 /* W3.CSS 4.11 October 2018 by Jan Egil and Borge Refsnes */
 html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
