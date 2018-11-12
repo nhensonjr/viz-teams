@@ -9,10 +9,10 @@ import {AuthGuard} from './auth.guard';
 
 const routes: Routes = [
   { path: '', component: TeamsComponent, canActivate: [AuthGuard]},
-  { path: 'login', component: LoginComponent},
   { path: 'registration', component: RegistrationComponent},
-  { path: 'edit/:id', component: EditPersonComponent},
-  { path: 'firebase-test', component: FirebaseTestComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'edit/:id', component: EditPersonComponent, canActivate: [AuthGuard]},
+  { path: 'firebase-test', component: FirebaseTestComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: '' }
 ];
 
