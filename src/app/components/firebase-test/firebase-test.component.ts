@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FirebaseTestItem, FirebaseTestService} from '../../services/firebase-test.service';
+import { Component, OnInit } from '@angular/core';
+import { FirebaseTestItem, FirebaseTestService } from '../../services/firebase-test.service';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-firebase-test',
@@ -18,10 +20,11 @@ import {FirebaseTestItem, FirebaseTestService} from '../../services/firebase-tes
       </div>
     </div>
 
-    <div *ngIf="singleItem">
+    <div *ngIf="user">
       <h3>Single Item</h3>
       <div>
-        <span>{{singleItem.id}} - {{singleItem.value}} - {{singleItem.color}}</span>
+        <span>{{user.firstName}} - {{user.lastName}} - {{user.position}} - {{user.email}} - {{user.password}}</span>
+        <button (click)="register()">reg</button>
       </div>
     </div>
   `,
@@ -32,13 +35,19 @@ export class FirebaseTestComponent implements OnInit {
   allItems: FirebaseTestItem[];
   queryItems: FirebaseTestItem[];
   singleItem: FirebaseTestItem;
+  user: User;
 
-  constructor(private service: FirebaseTestService) {
+  constructor(private service: FirebaseTestService, private userService: UserService) {
   }
 
   ngOnInit() {
     this.service.getTestList().subscribe(x => this.allItems = x);
     this.service.queryTestItem().subscribe(x => this.queryItems = x);
     this.service.getTestItem().subscribe(x => this.singleItem = x);
+    this.userService.getUser().subscribe(x => this.user = x);
+  }
+
+  register() {
+    this.userService.register();
   }
 }

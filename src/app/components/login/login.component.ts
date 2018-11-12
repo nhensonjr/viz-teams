@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +26,7 @@ import { Component } from '@angular/core';
 
         <div class="w3-display-container w3-half w3-right w3-margin-bottom">
           <div class="w3-center">
-            <button class="w3-button w3-teal w3-margin-left w3-right">Login</button>
+            <button class="w3-button w3-teal w3-margin-left w3-right" (click)="login()">Login</button>
             <button routerLink="/registration" class="w3-button w3-purple w3-right">Sign Up</button>
             <div id="no-cursor" class="w3-button w3-hover-none w3-hover-text-teal w3-right">Not a member?</div>
           </div>
@@ -35,6 +38,10 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
-  constructor() {
+  constructor(private authService: AngularFireAuth, private router: Router, private userService: UserService) {
+  }
+
+  login() {
+    console.log('YOu loGged in');
   }
 }
