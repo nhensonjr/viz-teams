@@ -12,57 +12,43 @@ import 'rxjs-compat/add/operator/map';
 @Component({
   selector: 'app-team-list',
   template: `
-    <!--<div *ngIf="teams.length <= 0" class="no-teams w3-container">-->
-      <!--<div class="w3-margin w3-large">-->
-        <!--Would you like to add a team?-->
-      <!--</div>-->
-      <!--<button onclick="document.getElementById('addTeamModal').style.display='flex'" class="w3-button w3-teal">-->
-        <!--Add Team-->
-      <!--</button>-->
-    <!--</div>-->
+    <div *ngIf="teams.length <= 0" class="no-teams w3-container">
+      <div class="w3-margin w3-large">
+        Would you like to add a team?
+      </div>
+      <button onclick="document.getElementById('addTeamModal').style.display='flex'" class="w3-button w3-teal">
+        Add Team
+      </button>
+    </div>
 
-    <!--<div *ngIf="teams.length > 0" class="">-->
-    <!--<div *ngFor="let team of (teams | teamSortAsc)">-->
-    <!--<div class="w3-card-4 w3-margin w3-pink">-->
-    <!--<h3>{{team.name}}</h3>-->
-    <!--<div *ngFor="let person of (team.members | personSortAsc)">-->
-    <!--<div class="w3-content w3-padding-large">-->
-    <!--<div>{{person.firstName}} {{person.lastName}}</div>-->
-    <!--<div>, {{person.position}}</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div *ngIf="teams.length > 0" class="team-list">-->
-      <!--<button class="add-team w3-button w3-teal w3-animate-top"-->
-              <!--onclick="document.getElementById('addTeamModal').style.display='flex'">-->
-        <!--Add Teams-->
-      <!--</button>-->
-      <!--<div class="team-column w3-animate-top" *ngFor='let team of (teams | teamSortAsc)'>-->
-        <!--<div class="drop-target" appDropTarget (myDrop)="onDrop($event,team)">-->
-          <!--<div class="team-header w3-display-container w3-padding w3-margin-top w3-teal w3-center">-->
-            <!--<h4>{{team.name}} Team</h4>-->
-            <!--<div class="w3-display-right" (click)="removeTeam(team)">-->
-              <!--<div class="w3-container w3-hover-none w3-hover-text-red"><i class='fas fa-trash'></i></div>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div *ngFor='let person of (team.members | personSortAsc)'>-->
-            <!--<div [appDraggable]="{data:person}" class="team-member">-->
-              <!--<div class="details">-->
-                <!--<div>{{person.firstName}} {{person.lastName}},</div>-->
-                <!--<div>{{person.position}}</div>-->
-              <!--</div>-->
-              <!--<div id="edit" class="btns">-->
-                <!--<div class="w3-container w3-hover-none w3-hover-text-green" (click)="edit(person)"><i-->
-                  <!--class='fas fa-edit'></i></div>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
+    <div *ngIf="teams.length > 0" class="team-list">
+      <button class="add-team w3-button w3-teal w3-animate-top"
+              onclick="document.getElementById('addTeamModal').style.display='flex'">
+        Add Teams
+      </button>
+      <div class="team-column w3-animate-top" *ngFor='let team of (teams | teamSortAsc)'>
+        <div class="drop-target" appDropTarget (myDrop)="onDrop($event,team)">
+          <div class="team-header w3-display-container w3-padding w3-margin-top w3-teal w3-center">
+            <h4>{{team.name}} Team</h4>
+            <div class="w3-display-right" (click)="removeTeam(team)">
+              <div class="w3-container w3-hover-none w3-hover-text-red"><i class='fas fa-trash'></i></div>
+            </div>
+          </div>
+          <div *ngFor='let person of (team.members | personSortAsc)'>
+            <div [appDraggable]="{data:person}" class="team-member">
+              <div class="details">
+                <div>{{person.firstName}} {{person.lastName}},</div>
+                <div>{{person.position}}</div>
+              </div>
+              <div id="edit" class="btns">
+                <div class="w3-container w3-hover-none w3-hover-text-green" (click)="edit(person)"><i
+                  class='fas fa-edit'></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div *ngFor="let test of tests | async">{{test.value}}</div>
 
@@ -88,22 +74,6 @@ import 'rxjs-compat/add/operator/map';
         </div>
       </div>
     </div>
-
-
-    <!--<div class="button-container">-->
-    <!--<button class='realButton' onclick="document.getElementById('addTeamModal').style.display='block'">-->
-    <!--Add New Team-->
-    <!--</button>-->
-    <!--<button class="realButton" (click)="openUpload()">-->
-    <!--Import <input type="file" class="hiddenUpload" id="srcfile" ngModel (change)="checkExtension($event)" accept=".csv" visibility="hidden">-->
-    <!--</button>-->
-    <!--<button class="realButton" (click)="exportCsv()" >-->
-    <!--Export-->
-    <!--</button>-->
-    <!--<button class="realButton" (click)="templateCsv()">-->
-    <!--Template-->
-    <!--</button>-->
-    <!--</div>-->
   `,
   styleUrls: ['./team-list.component.scss']
 })
@@ -113,7 +83,7 @@ export class TeamListComponent implements OnInit {
   valid = '';
   validation = '';
 
-  // teams: Team[] = [];
+  teams: Team[] = [];
   team: Team = new Team(0, '', []);
   canSubmit = false;
   tests: Observable<any>;
@@ -129,14 +99,6 @@ export class TeamListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.db.collection('teams').snapshotChanges()
-      .map(docData => {
-        docData.map(doc => {
-          console.log(doc.payload.doc.id, doc.payload.doc.data().name);
-        });
-      }).subscribe(x => {
-        console.log(x);
-    });
   }
 
   onDrop(person: Person, team: Team) {
@@ -151,7 +113,7 @@ export class TeamListComponent implements OnInit {
         theTeams.push(team);
       }
     }
-    // this.teams = theTeams;
+    this.teams = theTeams;
   }
 
   removeTeam(team: Team): void {
