@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { UserService } from '../../services/user.service';
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-registration',
   template: `
     <div class="w3-center-card w3-container w3-animate-top">
-      <form (ngSubmit)="onSubmit(regForm)" #regForm="ngForm" class="w3-container w3-half w3-card-4 w3-light-grey w3-text-teal">
+      <form (ngSubmit)="onSubmit(regForm)" #regForm="ngForm"
+            class="w3-container w3-half w3-card-4 w3-light-grey w3-text-teal">
         <h2 class="w3-center">Registration</h2>
 
         <div class="w3-row w3-section">
@@ -101,14 +102,17 @@ import { UserService } from '../../services/user.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(private user: UserService) {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
   }
 
-  onSubmit(form: NgForm): void {
-    this.user.register();
+  onSubmit(form: NgForm) {
+    this.authService.registerUser({
+      email: form.value.email,
+      password: form.value.password
+    });
   }
 
 }

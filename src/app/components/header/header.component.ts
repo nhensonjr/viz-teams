@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -8,8 +10,11 @@ import {Component} from '@angular/core';
         <img routerLink="home" src="/assets/vizTeams.png" alt="Viz Teams Logo">
       </div>
       <div class="links">
-        <button class="header-login-button" routerLink="login">
+        <button *ngIf="!isAuth" class="header-login-button" routerLink="login">
           Login/Register
+        </button>
+        <button *ngIf="isAuth" class="header-login-button" (click)="onLogout()">
+          Logout
         </button>
       </div>
     </div>
@@ -17,8 +22,27 @@ import {Component} from '@angular/core';
   `,
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
 
-  constructor() {
+  isAuth: boolean;
+  authSubscription: Subscription;
+
+  constructor(private auth: AuthService) {
   }
+
+  ngOnInit() {
+    this.auth.authChange.subscribe(authStatus => {
+      this.isAuth = authStatus;
+    });
+  }
+
+  onLogout() {
+    this.auth.logout();
+  }
+
+  ngOnDestroy() {
+    this.authSubscription.unsubscribe();
+  }
+
+
 }

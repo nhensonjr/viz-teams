@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseTestItem, FirebaseTestService } from '../../services/firebase-test.service';
 import { User } from '../../models/user.model';
-import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-firebase-test',
@@ -23,8 +23,6 @@ import { UserService } from '../../services/user.service';
     <div *ngIf="user">
       <h3>Single Item</h3>
       <div>
-        <span>{{user.firstName}} - {{user.lastName}} - {{user.position}} - {{user.email}} - {{user.password}}</span>
-        <button (click)="register()">reg</button>
       </div>
     </div>
   `,
@@ -37,17 +35,12 @@ export class FirebaseTestComponent implements OnInit {
   singleItem: FirebaseTestItem;
   user: User;
 
-  constructor(private service: FirebaseTestService, private userService: UserService) {
+  constructor(private service: FirebaseTestService, private authService: AuthService) {
   }
 
   ngOnInit() {
     this.service.getTestList().subscribe(x => this.allItems = x);
     this.service.queryTestItem().subscribe(x => this.queryItems = x);
     this.service.getTestItem().subscribe(x => this.singleItem = x);
-    this.userService.getUser().subscribe(x => this.user = x);
-  }
-
-  register() {
-    this.userService.register();
   }
 }

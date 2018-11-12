@@ -33,6 +33,7 @@ import { TeamSortAscPipe } from './pipes/team-sort-asc.pipe';
 import { TeamsComponent } from './components/teams/teams.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import {AuthService} from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     PersonService,
     PersonStore,
     TeamService,
-    TeamStore
+    TeamStore,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

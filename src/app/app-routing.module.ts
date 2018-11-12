@@ -5,18 +5,20 @@ import { FirebaseTestComponent } from './components/firebase-test/firebase-test.
 import { TeamsComponent } from './components/teams/teams.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import {AuthGuard} from './auth.guard';
 
 const routes: Routes = [
   { path: '', component: TeamsComponent},
   { path: 'login', component: LoginComponent},
   { path: 'registration', component: RegistrationComponent},
   { path: 'edit/:id', component: EditPersonComponent},
-  { path: 'firebase-test', component: FirebaseTestComponent},
+  { path: 'firebase-test', component: FirebaseTestComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  exports: [ RouterModule ],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

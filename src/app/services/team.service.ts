@@ -1,18 +1,24 @@
-import { Injectable } from '@angular/core';
-import { PersonService } from './person.service';
-import { Team } from '../models/team';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Person } from '../models/person';
-import { TeamStore } from '../services/team-store';
+import {Injectable, OnInit} from '@angular/core';
+import {PersonService} from './person.service';
+import {Team} from '../models/team';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Person} from '../models/person';
+import {TeamStore} from '../services/team-store';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Injectable()
-export class TeamService {
+export class TeamService implements OnInit {
+
   teamsSubject: BehaviorSubject<Team[]> = new BehaviorSubject<Team[]>([]);
 
+  constructor(private teamStore: TeamStore, private personService: PersonService, private db: AngularFirestore) {
+    this.personService.getPeople().subscribe(p => this.buildTeams(p));
+  }
 
-
-  constructor(private teamStore: TeamStore, private personService: PersonService) {
-     this.personService.getPeople().subscribe(p => this.buildTeams(p));
+  ngOnInit() {
+    this.db.collection('teams').valueChanges().subscribe(result => {
+      console.log(result);
+    });
   }
 
   buildTeams(people: Person[]): void {
@@ -27,10 +33,6 @@ export class TeamService {
     });
 
     this.teamsSubject.next(this.teamStore.init(teams));
-
-
-
-
   }
 
   addTeam(team: Team): void {
@@ -42,7 +44,7 @@ export class TeamService {
   }
 
   removeTeam(team: Team): void {
-    let people = team.members;
+    const people = team.members;
     people.forEach(person => {
       person.teamName = '';
       this.personService.updatePerson(person);
