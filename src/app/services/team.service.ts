@@ -4,21 +4,17 @@ import {Team} from '../models/team';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Person} from '../models/person';
 import {TeamStore} from '../services/team-store';
-import {AngularFirestore} from '@angular/fire/firestore';
 
 @Injectable()
 export class TeamService implements OnInit {
 
   teamsSubject: BehaviorSubject<Team[]> = new BehaviorSubject<Team[]>([]);
 
-  constructor(private teamStore: TeamStore, private personService: PersonService, private db: AngularFirestore) {
+  constructor(private teamStore: TeamStore, private personService: PersonService) {
     this.personService.getPeople().subscribe(p => this.buildTeams(p));
   }
 
   ngOnInit() {
-    this.db.collection('teams').valueChanges().subscribe(result => {
-      console.log(result);
-    });
   }
 
   buildTeams(people: Person[]): void {

@@ -8,11 +8,11 @@ import { RegistrationComponent } from './components/registration/registration.co
 import {AuthGuard} from './auth.guard';
 
 const routes: Routes = [
-  { path: '', component: TeamsComponent},
+  { path: '', component: TeamsComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent},
   { path: 'registration', component: RegistrationComponent},
   { path: 'edit/:id', component: EditPersonComponent},
-  { path: 'firebase-test', component: FirebaseTestComponent, canActivate: [AuthGuard]},
+  { path: 'firebase-test', component: FirebaseTestComponent},
   { path: '**', redirectTo: '' }
 ];
 
